@@ -20,15 +20,37 @@ export class TaskService {
     });
   }
 
-  async getTasksByExamNum(examNum: number): Promise<TaskModel[]> {
-    return this.prisma.task.findMany({
+  async getTasksIdsByExamNum(examNum: number): Promise<number[]> {
+    const tasks = await this.prisma.task.findMany({
       where: {
         examNum,
       },
+      select: {
+        id: true,
+      },
     });
+
+    const tasksIdsArray = tasks.map((task) => task.id);
+
+    return tasksIdsArray;
   }
 
   async getTasks(): Promise<TaskModel[]> {
     return this.prisma.task.findMany();
+  }
+
+  async getUniqueExamNums() {
+    const examNums = await this.prisma.task.findMany({
+      distinct: ['examNum'],
+      select: {
+        examNum: true,
+      },
+    });
+
+    const examNumsArray = examNums.map(
+      ({ examNum }: { examNum: number }) => examNum,
+    );
+
+    return examNumsArray;
   }
 }

@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Task {
-  id      Int     @id() @default(autoincrement())
-  examNum Int
-  answer  String
-  code    String?
-  comment String?
+  id          Int      @id() @default(autoincrement())
+  examNum     Int
+  answer      String
+  code        String?
+  comment     String?
+  filesPathes String[]
 }
