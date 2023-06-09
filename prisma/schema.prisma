@@ -12,6 +12,7 @@ datasource db {
 
 model Task {
   id          Int      @id() @default(autoincrement())
+  description String
   examNum     Int
   answer      String
   code        String?

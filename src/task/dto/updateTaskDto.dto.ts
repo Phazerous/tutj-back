@@ -1,11 +1,14 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateTaskDto {
+export class UpdateTaskDto {
   @IsNumber()
-  examNum: number;
+  id: number;
 
   @IsString()
   description: string;
+
+  @IsNumber()
+  examNum: number;
 
   @IsString()
   answer: string;

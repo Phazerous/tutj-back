@@ -8,11 +8,11 @@ import {
   UsePipes,
   ValidationPipe,
   Body,
-  HttpException,
-  HttpStatus,
+  Patch,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/createTaskDto.dto';
+import { UpdateTaskDto } from './dto/updateTaskDto.dto';
 
 @Controller('')
 export class TaskController {
@@ -21,6 +21,11 @@ export class TaskController {
   @Get('tasks/:id')
   async getTaskById(@Param('id', ParseIntPipe) id: number) {
     return await this.taskService.getTaskById({ id });
+  }
+
+  @Patch('tasks/:id')
+  async updateTask(@Body() updateTaskDto: UpdateTaskDto) {
+    return await this.taskService.updateTask(updateTaskDto);
   }
 
   @Get('tasks')
